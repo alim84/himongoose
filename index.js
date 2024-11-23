@@ -29,6 +29,11 @@ app.get("/getalldata", async (req, res) => {
   let getalldata = await himodel.find({});
   res.status(200).send({ message: "Show all data", data: getalldata });
 });
+app.get("/getdata/:id", async (req, res) => {
+  let { id } = req.params;
+  let getdata = await himodel.findOne({ _id: id });
+  res.status(200).send({ message: "Show all data", data: getdata });
+});
 app.delete("/deletedata/:id", async (req, res) => {
   let { id } = req.params;
   let deletedata = await himodel.findOneAndDelete({ _id: id });
@@ -38,7 +43,11 @@ app.delete("/deletedata/:id", async (req, res) => {
 app.patch("/updatedata/:id", async (req, res) => {
   let { id } = req.params;
   let { name } = req.body;
-  let updatedata = await himodel.findOneAndUpdate({ _id: id }, { name: name });
+  let updatedata = await himodel.findOneAndUpdate(
+    { _id: id },
+    { name: name },
+    { new: true }
+  );
   res.status(200).send({ message: "update data", data: updatedata });
 });
 
