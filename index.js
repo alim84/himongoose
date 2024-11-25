@@ -2,9 +2,11 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const connectdb = require("./DBconnect/dbconnect");
 const himodel = require("./models/hi.model");
+const cors= require ('cors')
 
 const app = express();
 const port = 4000;
+app.use (cors())
 
 connectdb();
 
